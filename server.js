@@ -33,6 +33,7 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/movie_scraper_
 mongoose.connect(MONGODB_URI);
 
 
+
 // Retrieve data from the db
 app.get("/all", function(req, res) {
   // Find all results from the scrapedData collection in the db
@@ -86,7 +87,7 @@ app.get("/scrape", function(req, res) {
   
   
   // Listen on port 3000
-  app.listen(3000, function() {
+  app.listen(PORT, function() {
     console.log("App running on port 3000!");
   });
 
