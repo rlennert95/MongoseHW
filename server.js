@@ -106,7 +106,7 @@ app.get("/weekend", function(req, res) {
 });
 
 app.get("/", function(req, res) {
-  res.render("all-lunches", {
+  res.render("content", {
     foods: lunches,
     eater: "david"
   });
