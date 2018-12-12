@@ -28,9 +28,8 @@ db.on("error", function(error) {
   console.log("Database Error:", error);
 });
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/movie_scraper_db";
 
-mongoose.connect(MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/movie_scraper_db";);
 
 
 
