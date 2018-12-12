@@ -29,7 +29,7 @@ db.on("error", function(error) {
 });
 
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/movie_scraper_db";);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/movie_scraper_db");
 
 
 
