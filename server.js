@@ -4,29 +4,25 @@ var mongoose = require("mongoose");
 var mongojs = require("mongojs");
 var axios = require("axios");
 var cheerio = require("cheerio");
-
+var express = require("express");
+var exphbs = require("express-handlebars");
 var db = require("./models");
 
-var PORT = 3000;
-
+// Create an instance of the express app.
 var app = express();
 
-app.use(logger("dev"));
-// Parse request body as JSON
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-// Make public a static folder
-app.use(express.static("public"));
+// Set the port of our application
+// process.env.PORT lets the port be set by Heroku
+var PORT = process.env.PORT || 3000;
 
+// Set Handlebars as the default templating engine.
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
-app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname + "./public/index.html"));
-});
 
 var databaseUrl = "movie_scraper_db";
 var collections = ["MovieData"];
 
-// Hook mongojs configuration to the db variable
 var db = mongojs(databaseUrl, collections);
 db.on("error", function(error) {
   console.log("Database Error:", error);
@@ -90,4 +86,29 @@ app.get("/scrape", function(req, res) {
   app.listen(3000, function() {
     console.log("App running on port 3000!");
   });
-  
+
+// Data
+var lunches = [
+  {
+    lunch: "Beet & Goat Cheese Salad with minestrone soup."
+  }, {
+    lunch: "Pizza, two double veggie burgers, fries with a Big Gulp"
+  }
+];
+
+// Routes
+app.get("/weekday", function(req, res) {
+  res.render("index", lunches[0]);
+});
+
+app.get("/weekend", function(req, res) {
+  res.render("index", lunches[1]);
+});
+
+app.get("/", function(req, res) {
+  res.render("all-lunches", {
+    foods: lunches,
+    eater: "david"
+  });
+});
+

@@ -1,0 +1,32 @@
+<div id="wrapper">
+  <h1>News</h1>
+  <h2>Placeholder</h2>
+  <div id="articles">
+
+    <script>
+      $.getJSON("/all", function (data) {
+        // For each one
+        for (var i = 0; i < data.length; i++) {
+          // Display the apropos information on the page
+          $("#articles").append(
+            "<p data-id='" + 
+            data[i]._id + 
+            "'>" + data[i].title + 
+            "<br />" + data[i].link + 
+
+
+"<form action='/action_page.php'>" +
+"First name: <input type='text' name='Name'><br>" +
+"Comment: <input type='text' name='Comment'><br>" +
+"<input type='submit' value='Submit'>" +
+"</form>" +
+
+            "</p>"
+            );
+        }
+      });
+    </script>
+
+  </div>
+  <div id="notes"></div>
+</div>
